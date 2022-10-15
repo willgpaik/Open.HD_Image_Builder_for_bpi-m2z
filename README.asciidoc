@@ -39,6 +39,7 @@ toc::[]
 >
 > - Only minor changes are made from original repo unless "bpi-stretch" is selected
 - Not guaranteed to work
+- Need 60 GB for "bpi-stretch"
 
 Short version: This project takes a Raspbian-lite base image and modifies it into a Open.HD compatible image.
 For the long version, read on.

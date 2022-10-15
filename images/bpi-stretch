@@ -1,4 +1,5 @@
-BASE_IMAGE=$(find /home -type f -name "2020-04-28-raspbian-stretch-bpi-m2z-sd-emmc.img.zip")
+BASE_IMAGE_URL="https://drive.google.com/file/d/1G5NJDwL0Vs9YLwUEdGXMSwBPqRx6CxTC"
+BASE_IMAGE="2020-04-28-raspbian-stretch-bpi-m2z-sd-emmc.img.zip"
 BASE_IMAGE_SHA256="7ce9dc43739bfcbbba93810e3d4a282c5a0856766fd12c0dc2107dccdd4534d4"
 OS="raspbian"
 DISTRO="stretch"

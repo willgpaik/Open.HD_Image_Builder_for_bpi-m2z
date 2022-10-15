@@ -35,6 +35,11 @@ endif::[]
 // Table of Contents
 toc::[]
 
+> **NOTE: This version allows Open.HD to be installed on  Banana Pi M2 Zero**
+>
+> - Only minor changes are made from original repo unless "bpi-stretch" is selected
+- Not guaranteed to work
+
 Short version: This project takes a Raspbian-lite base image and modifies it into a Open.HD compatible image.
 For the long version, read on.
 

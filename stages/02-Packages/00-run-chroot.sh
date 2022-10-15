@@ -69,7 +69,11 @@ fi
 
 echo "-------------------------GETTING FIRST UPDATE------------------------------------"
 
-apt update --allow-releaseinfo-change || exit 1  
+if [ $(lsb_release -cs) != "stretch" ]; then
+       apt update --allow-releaseinfo-change || exit 1  
+else
+       apt update || exit 1
+fi
 
 echo "-------------------------DONE GETTING FIRST UPDATE-------------------------------"
 
@@ -86,7 +90,15 @@ fi
 
 echo "-------------------------GETTING SECOND UPDATE------------------------------------"
 
-apt update --allow-releaseinfo-change || exit 1
+if [ $(lsb_release -cs) != "stretch" ]; then
+        apt update --allow-releaseinfo-change || exit 1
+else
+        apt update || exit 1
+fi
+
+# Change timezone:
+echo "America/New_York" | tee /etc/timezone
+dpkg-reconfigure --frontend noninteractive tzdata
 
 echo "-------------------------DONE GETTING SECOND UPDATE------------------------------------"
 
@@ -125,14 +137,21 @@ if [[ "${OS}" == "ubuntu" ]]; then
 fi
 
 apt update && apt upgrade -y
-apt -y --no-install-recommends install \
-${OPENHD_PACKAGE} \
-${PLATFORM_PACKAGES} \
-${GNUPLOT} || exit 1
+if [ $(lsb_release -cs) != "stretch" ]; then
+       apt -y --no-install-recommends install \
+        ${OPENHD_PACKAGE} \
+        ${PLATFORM_PACKAGES} \
+        ${GNUPLOT} || exit 1
+else
+       apt -y --no-install-recommends install ${OPENHD_PACKAGE} || exit 1
+fi
 apt install -y libsodium-dev libpcap-dev git nano build-essential
+apt install -y cmake
 git clone https://github.com/Consti10/wifibroadcast.git
 cd wifibroadcast
-make
+sed -i "s/3.16.3/3.5.0/g" CMakeLists.txt
+./install_dep.sh
+./build_cmake.sh
 mv /usr/local/bin/wfb_tx /usr/local/bin/wfb_tx.bak
 mv /usr/local/bin/wfb_rx /usr/local/bin/wfb_rx.bak
 mv /usr/local/bin/wfb_keygen /usr/local/bin/wfb_keygen.bak
@@ -156,5 +175,9 @@ MNT_DIR="${STAGE_WORK_DIR}/mnt"
 # in the work dir so the builder can use it in the image name
 export OPENHD_VERSION=$(dpkg -s openhd | grep "^Version" | awk '{ print $2 }')
 
-echo ${OPENHD_VERSION} > /openhd_version.txt
-echo ${OPENHD_VERSION} > /boot/openhd_version.txt
+touch /usr/openhd_version.txt
+echo ${OPENHD_VERSION} > /usr/openhd_version.txt
+cp /usr/openhd_version.txt /
+mkdir -p /boot
+cp /usr/openhd_version.txt /boot/
+rm /usr/openhd_version.txt

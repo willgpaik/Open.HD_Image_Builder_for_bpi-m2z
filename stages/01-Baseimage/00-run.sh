@@ -33,6 +33,7 @@ if [[ "${SHA}" != "${BASE_IMAGE_SHA256}  ${BASE_IMAGE}" ]]; then
 	fi
 fi
 
+cp ${BASE_IMAGE} .
 
 log "Unarchive base image"
 

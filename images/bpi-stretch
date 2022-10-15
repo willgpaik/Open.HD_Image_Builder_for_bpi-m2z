@@ -1,0 +1,11 @@
+BASE_IMAGE=$(find /home -type f -name "2020-04-28-raspbian-stretch-bpi-m2z-sd-emmc.img.zip")
+BASE_IMAGE_SHA256="7ce9dc43739bfcbbba93810e3d4a282c5a0856766fd12c0dc2107dccdd4534d4"
+OS="raspbian"
+DISTRO="stretch"
+HAS_CUSTOM_KERNEL=true
+KERNEL_PACKAGE="openhd-linux-pi=20201124.1"
+HAVE_BOOT_PART=true
+HAVE_CONF_PART=false
+BOOT_PART=1
+ROOT_PART=2
+BIT="32"

@@ -150,6 +150,7 @@ apt install -y cmake
 git clone https://github.com/Consti10/wifibroadcast.git
 cd wifibroadcast
 sed -i "s/3.16.3/3.5.0/g" CMakeLists.txt
+sed -i "s/3.16.3/3.5.0/g" WBLib.cmake
 ./install_dep.sh
 ./build_cmake.sh
 mv /usr/local/bin/wfb_tx /usr/local/bin/wfb_tx.bak

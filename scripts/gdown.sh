@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # install gdown PyPI module:
-apt install -y python pip
+apt install -y python3 pip
 pip install gdown
 
 # download bpi m2 zero image (pi OS stretch):
